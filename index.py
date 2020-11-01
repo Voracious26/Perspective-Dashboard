@@ -15,18 +15,17 @@ def main():
     values_cases = json.loads(data_cases)
     values_population = json.loads(data_population)
 
-    dict_cases = {}
-    dict_population = {}
+    countryData = {}
 
-    for i in values_cases["Countries"]:
-        dict_cases[i["CountryCode"]] = i["TotalConfirmed"]
     for i in values_population:
-        dict_population[i["alpha2Code"]] = i["population"]
+        countryData[i["alpha2Code"]] = {}
+        countryData[i["alpha2Code"]]["population"] = i["population"]
+    for i in values_cases["Countries"]:
+        if i["CountryCode"] in countryData:
+            countryData[i["CountryCode"]
+                        ]["confirmed_cases"] = i["TotalConfirmed"]
 
-    out = "COVID-19 cases:<br />"
-    out += str(dict_cases)
-    out += "<br /><br />"
-    out += "Populations:<br />"
-    out += str(dict_population)
+    out = "Country data:<br />"
+    out += str(countryData)
 
     return out
