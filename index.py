@@ -7,12 +7,13 @@ app = Flask(__name__)
 @app.route('/')
 def main():
     url_cases = "https://api.covid19api.com/summary"
-    url_population = "https://restcountries.eu/rest/v2/"
     response_cases = urllib.request.urlopen(url_cases)
-    response_population = urllib.request.urlopen(url_population)
     data_cases = response_cases.read()
-    data_population = response_population.read()
     values_cases = json.loads(data_cases)
+
+    url_population = "https://restcountries.eu/rest/v2/"
+    response_population = urllib.request.urlopen(url_population)
+    data_population = response_population.read()
     values_population = json.loads(data_population)
 
     countryData = {}
