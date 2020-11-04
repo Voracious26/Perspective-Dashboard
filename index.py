@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import json
 import urllib.request
 app = Flask(__name__)
@@ -26,7 +26,4 @@ def main():
             countryData[i["CountryCode"]
                         ]["confirmed_cases"] = i["TotalConfirmed"]
 
-    out = "Country data:<br />"
-    out += str(countryData)
-
-    return out
+    return render_template('home.html', countryData=countryData)

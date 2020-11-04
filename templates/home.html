@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Country Data</h1>
+<table>
+{% for row_index in countryData.keys() %}
+<tr>
+<td>{{ row_index }}</td>
+<td>{{ countryData[row_index]['population'] }}</td>
+<td>{{ countryData[row_index]['confirmed_cases'] }}</td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
