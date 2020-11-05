@@ -19,11 +19,19 @@ def main():
     countryData = {}
 
     for i in values_population:
-        countryData[i["alpha2Code"]] = {}
-        countryData[i["alpha2Code"]]["population"] = i["population"]
+        if int(i["population"]) > 0:
+            countryData[i["alpha2Code"]] = {}
+            countryData[i["alpha2Code"]]["population"] = int(i["population"])
     for i in values_cases["Countries"]:
         if i["CountryCode"] in countryData:
-            countryData[i["CountryCode"]
-                        ]["confirmed_cases"] = i["TotalConfirmed"]
+            countryData[i["CountryCode"]]["confirmed_cases"] = int(i["TotalConfirmed"])
+
+
+    for key,value in countryData.items():
+        if not "confirmed_cases" in value.keys():
+            value["confirmed_cases"] = 0
+        print(key)
+        print(value["confirmed_cases"] / value['population'])
+        value["percent_cases"] = "{:0.2f}%".format(100 * value["confirmed_cases"] / value['population'])
 
     return render_template('home.html', countryData=countryData)
