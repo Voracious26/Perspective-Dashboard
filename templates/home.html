@@ -6,6 +6,7 @@
 {% for row_index in countryData.keys() %}
 <tr>
 <td>{{ row_index }}</td>
+<td>{{ countryData[row_index]['name'] }}</td>
 <td>{{ countryData[row_index]['population'] }}</td>
 <td>{{ countryData[row_index]['confirmed_cases'] }}</td>
 <td>{{ countryData[row_index]['percent_cases'] }}</td>

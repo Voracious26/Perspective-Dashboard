@@ -21,6 +21,7 @@ def main():
     for i in values_population:
         if int(i["population"]) > 0:
             countryData[i["alpha2Code"]] = {}
+            countryData[i["alpha2Code"]]["name"] = i["name"]
             countryData[i["alpha2Code"]]["population"] = int(i["population"])
     for i in values_cases["Countries"]:
         if i["CountryCode"] in countryData:
