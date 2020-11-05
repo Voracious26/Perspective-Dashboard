@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+from collections import OrderedDict
+from operator import getitem 
 import json
 import urllib.request
 app = Flask(__name__)
@@ -26,11 +28,13 @@ def main():
     for i in values_cases["Countries"]:
         if i["CountryCode"] in countryData:
             countryData[i["CountryCode"]]["confirmed_cases"] = int(i["TotalConfirmed"])
-
-
+  
     for key,value in countryData.items():
         if not "confirmed_cases" in value.keys():
             value["confirmed_cases"] = 0
+        value["percent_cases_as_float"] = 100 * value["confirmed_cases"] / value['population']
         value["percent_cases"] = "{:0.2f}%".format(100 * value["confirmed_cases"] / value['population'])
 
+    
+    countryData = OrderedDict(sorted(countryData.items(), key = lambda x: getitem(x[1], 'percent_cases_as_float'), reverse=True)) 
     return render_template('home.html', countryData=countryData)
