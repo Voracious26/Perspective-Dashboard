@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h1>Country Data</h1>
-<table>
-{% for row_index in countryData.keys() %}
-<tr>
-<td>{{ row_index }}</td>
-<td>{{ countryData[row_index]['name'] }}</td>
-<td>{{ countryData[row_index]['population'] }}</td>
-<td>{{ countryData[row_index]['confirmed_cases'] }}</td>
-<td>{{ countryData[row_index]['percent_cases'] }}</td>
-</tr>
-{% endfor %}
-</table>
-</body>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    </head>
+    <body>
+        <h1>Country Data</h1>
+        <table class="blueTable">
+            <tbody>
+            {% for row_index in countryData.keys() %}
+            <tr>
+            <td>{{ row_index }}</td>
+            <td>{{ countryData[row_index]['name'] }}</td>
+            <td>{{ countryData[row_index]['population'] }}</td>
+            <td>{{ countryData[row_index]['confirmed_cases'] }}</td>
+            <td>{{ countryData[row_index]['percent_cases'] }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </body>
 </html>

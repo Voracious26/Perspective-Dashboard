@@ -31,8 +31,6 @@ def main():
     for key,value in countryData.items():
         if not "confirmed_cases" in value.keys():
             value["confirmed_cases"] = 0
-        print(key)
-        print(value["confirmed_cases"] / value['population'])
         value["percent_cases"] = "{:0.2f}%".format(100 * value["confirmed_cases"] / value['population'])
 
     return render_template('home.html', countryData=countryData)
