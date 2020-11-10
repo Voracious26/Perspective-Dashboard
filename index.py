@@ -20,6 +20,8 @@ def main():
 
     countryData = {}
     greaterThan = request.args.get('popgreaterthan', default = 0, type = int);
+    params = {}
+    params['popGreaterThan'] = greaterThan
     for i in values_population:
         if int(i["population"]) > greaterThan:
             countryData[i["alpha2Code"]] = {}
@@ -37,4 +39,4 @@ def main():
 
     
     countryData = OrderedDict(sorted(countryData.items(), key = lambda x: getitem(x[1], 'percent_cases_as_float'), reverse=True)) 
-    return render_template('home.html', countryData=countryData)
+    return render_template('home.html', countryData=countryData, params=params)
