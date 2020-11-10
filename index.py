@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from collections import OrderedDict
 from operator import getitem 
 import json
@@ -6,7 +6,7 @@ import urllib.request
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/index')
 def main():
     url_cases = "https://api.covid19api.com/summary"
     response_cases = urllib.request.urlopen(url_cases)
@@ -19,9 +19,9 @@ def main():
     values_population = json.loads(data_population)
 
     countryData = {}
-
+    greaterThan = request.args.get('popgreaterthan', default = 0, type = int);
     for i in values_population:
-        if int(i["population"]) > 0:
+        if int(i["population"]) > greaterThan:
             countryData[i["alpha2Code"]] = {}
             countryData[i["alpha2Code"]]["name"] = i["name"]
             countryData[i["alpha2Code"]]["population"] = int(i["population"])
